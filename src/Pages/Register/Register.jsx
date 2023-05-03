@@ -118,7 +118,6 @@ export const RegisterForm = () => {
               label="Email Address"
               name="email"
               autoComplete="email"
-              autoFocus
               value={formik.values.email}
               onChange={formik.handleChange}
               error={formik.touched.email && Boolean(formik.errors.email)}
