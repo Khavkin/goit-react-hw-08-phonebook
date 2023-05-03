@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { useDeleteContactMutation } from 'api/swagger-api';
 import { ClipLoader } from 'react-spinners';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
-import { IconButton, Typography } from '@mui/material';
+import { IconButton, Tooltip, Typography } from '@mui/material';
 import { toast } from 'react-toastify';
 
 const ContactListItem = ({ contact }) => {
@@ -15,6 +15,7 @@ const ContactListItem = ({ contact }) => {
   const handleOnDeleteClick = async id => {
     try {
       await deleteContact(id).unwrap();
+      toast.success('Deleted successfuly');
     } catch (error) {
       toast.error('Deleting error');
     }
@@ -22,24 +23,25 @@ const ContactListItem = ({ contact }) => {
 
   return (
     <ListItem>
-      <Typography sx={{ width: '150px' }}>{name}</Typography>
-      <Typography sx={{ width: '150px' }}>{number}</Typography>
-
-      <IconButton
-        size="small"
-        aria-label="delete contact"
-        aria-haspopup="true"
-        color="inherit"
-        onClick={() => {
-          handleOnDeleteClick({ id });
-        }}
-      >
-        {isDeleting ? (
-          <ClipLoader color={'primary.contrastText'} size={14} />
-        ) : (
-          <DeleteOutlineOutlinedIcon />
-        )}
-      </IconButton>
+      <Typography sx={{ width: '200px' }}>{name}</Typography>
+      <Typography sx={{ width: '200px' }}>{number}</Typography>
+      <Tooltip title="Delete Contact" placement="right">
+        <IconButton
+          size="small"
+          aria-label="delete contact"
+          aria-haspopup="true"
+          color="inherit"
+          onClick={() => {
+            handleOnDeleteClick({ id });
+          }}
+        >
+          {isDeleting ? (
+            <ClipLoader color={'primary.contrastText'} size={14} />
+          ) : (
+            <DeleteOutlineOutlinedIcon />
+          )}
+        </IconButton>
+      </Tooltip>
     </ListItem>
   );
 };

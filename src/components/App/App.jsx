@@ -1,5 +1,5 @@
 import SharedLayout from 'components/SharedLayout/SharedLayout';
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 
 import { UseAuth } from 'hooks/useAuth';
 import { useGetCurrentUserQuery } from 'api/swagger-api';
@@ -43,7 +43,7 @@ const App = () => {
             }
           ></Route>
           <Route
-            path="/login"
+            path="login"
             element={
               <Suspense
                 fallback={<ClipLoader color={'secondary.main'} size={24} />}
@@ -55,7 +55,7 @@ const App = () => {
             }
           />
           <Route
-            path="/register"
+            path="register"
             element={
               <Suspense
                 fallback={<ClipLoader color={'secondary.main'} size={24} />}
@@ -67,7 +67,7 @@ const App = () => {
             }
           />
           <Route
-            path="/contacts"
+            path="contacts"
             element={
               <Suspense
                 fallback={<ClipLoader color={'secondary.main'} size={24} />}
@@ -79,6 +79,7 @@ const App = () => {
             }
           />
           )
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Route>
       </Routes>
 

@@ -48,9 +48,15 @@ export const LoginForm = () => {
         navigate('/contacts');
       } catch (error) {
         error.status === 400
-          ? toast.error('Invalid Email ro Password')
-          : toast.error('Server Error');
-        console.log(error);
+          ? toast.error('Invalid Email or Password', {
+              position: toast.POSITION.TOP_CENTER,
+              autoClose: false,
+            })
+          : toast.error('Server Error', {
+              position: toast.POSITION.TOP_CENTER,
+              autoClose: false,
+            });
+        //console.log(error);
       }
     },
   });

@@ -16,6 +16,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useSignUpMutation } from 'api/swagger-api';
 import { UseAuth } from 'hooks/useAuth';
 import { ClipLoader } from 'react-spinners';
+import { toast } from 'react-toastify';
 
 const mailRegExp =
   /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
@@ -55,7 +56,18 @@ export const RegisterForm = () => {
         resetForm();
         navigate('/contacts');
       } catch (error) {
-        console.log(error);
+        const { status, data } = error;
+        toast.error(
+          `Error status ${status}. ${data?.name}-${
+            data?.code
+          } in ${JSON.stringify(data?.keyValue)} `,
+          {
+            position: toast.POSITION.TOP_CENTER,
+            autoClose: false,
+          }
+        );
+
+        //console.log(error);
       }
     },
   });
@@ -137,8 +149,8 @@ export const RegisterForm = () => {
               autoComplete="current-password"
               value={formik.values.confirm}
               onChange={formik.handleChange}
-              error={formik.touched.password && Boolean(formik.errors.password)}
-              helperText={formik.touched.password && formik.errors.password}
+              error={formik.touched.confirm && Boolean(formik.errors.confirm)}
+              helperText={formik.touched.confirm && formik.errors.confirm}
             />
 
             <Button

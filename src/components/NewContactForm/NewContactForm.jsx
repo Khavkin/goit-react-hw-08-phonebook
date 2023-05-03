@@ -57,8 +57,14 @@ const NewContactForm = ({ onClose }) => {
         return true;
       } catch (error) {
         error.status === 400
-          ? toast.error('Insert contact Error')
-          : toast.error('Server Error');
+          ? toast.error('Insert contact Error', {
+              position: toast.POSITION.TOP_CENTER,
+              autoClose: false,
+            })
+          : toast.error('Server Error', {
+              position: toast.POSITION.TOP_CENTER,
+              autoClose: false,
+            });
 
         return false;
       }
@@ -77,7 +83,11 @@ const NewContactForm = ({ onClose }) => {
         resetForm();
         toast.success(`Contact ${values.name} is added.`);
         onClose();
-      } else toast.error(`${values.name} already in contacts`);
+      } else
+        toast.error(`${values.name} already in contacts`, {
+          position: toast.POSITION.TOP_CENTER,
+          autoClose: false,
+        });
     },
   });
 
@@ -140,8 +150,8 @@ const NewContactForm = ({ onClose }) => {
               startIcon={<SaveOutlinedIcon />}
               sx={{ mt: 3, mb: 2 }}
               disabled={
-                formik.errors.name ||
-                formik.errors.number ||
+                formik.errors.name === '' ||
+                formik.errors.number === '' ||
                 formik.values.name === '' ||
                 formik.values.number === ''
               }

@@ -4,7 +4,7 @@ import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 
 import SearchIcon from '@mui/icons-material/Search';
-import { Dialog } from '@mui/material';
+import { Dialog, Tooltip } from '@mui/material';
 import PersonAddAltOutlinedIcon from '@mui/icons-material/PersonAddAltOutlined';
 
 //import { useAddContactMutation } from 'api/swagger-api';
@@ -49,16 +49,18 @@ export const ContactsToolBar = () => {
             onChange={handlerOnChange}
           />
         </Search>
-        <IconButton
-          size="large"
-          aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
-          aria-haspopup="true"
-          color="inherit"
-          onClick={handleOnAddContact}
-        >
-          <PersonAddAltOutlinedIcon />
-        </IconButton>
+        <Tooltip title="Add Contact">
+          <IconButton
+            size="large"
+            aria-label="account of current user"
+            aria-controls="primary-search-account-menu"
+            aria-haspopup="true"
+            color="inherit"
+            onClick={handleOnAddContact}
+          >
+            <PersonAddAltOutlinedIcon />
+          </IconButton>
+        </Tooltip>
       </Toolbar>
       <Dialog open={openDialog}>
         <NewContactForm onClose={handleClose} />
