@@ -1,17 +1,6 @@
-//import ContactForm from 'components/ContactForm';
-
-//import Filter from 'components/Filter';
-//import ContactList from 'components/ContactList';
-//import { useDispatch, useSelector } from 'react-redux';
-//import { useEffect } from 'react';
-//import { fetchContacts } from 'redux/operations';
-//import { selectError, selectIsLoading } from 'redux/selectors';
 import SharedLayout from 'components/SharedLayout/SharedLayout';
-//import { LoginForm } from 'components/Pages/Login/Login';
 import { Route, Routes } from 'react-router-dom';
-import Home from 'components/Pages/Home/Home';
-//import RegisterForm from 'components/Pages/Register/Register';
-//import Contacts from 'components/Pages/Contacts';
+
 import { UseAuth } from 'hooks/useAuth';
 import { useGetCurrentUserQuery } from 'api/swagger-api';
 import { Box } from '@mui/material';
@@ -22,9 +11,10 @@ import PublicRoute from 'components/PublicRoute/PublicRoute';
 import { lazy, Suspense } from 'react';
 import { ClipLoader } from 'react-spinners';
 
-const LoginForm = lazy(() => import('components/Pages/Login'));
-const RegisterForm = lazy(() => import('components/Pages/Register'));
-const Contacts = lazy(() => import('components/Pages/Contacts'));
+const LoginForm = lazy(() => import('Pages/Login'));
+const RegisterForm = lazy(() => import('Pages/Register'));
+const Contacts = lazy(() => import('Pages/Contacts'));
+const Home = lazy(() => import('Pages/Home'));
 
 const App = () => {
   // const dispatch = useDispatch();
@@ -42,7 +32,16 @@ const App = () => {
       <Routes>
         <Route path="/" element={<SharedLayout />}>
           {!isRefreshing} && (
-          <Route index element={<Home />} />
+          <Route
+            index
+            element={
+              <Suspense
+                fallback={<ClipLoader color={'secondary.main'} size={24} />}
+              >
+                <Home />
+              </Suspense>
+            }
+          ></Route>
           <Route
             path="/login"
             element={
