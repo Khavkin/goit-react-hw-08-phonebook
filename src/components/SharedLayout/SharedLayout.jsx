@@ -4,9 +4,11 @@ import LocalLibraryOutlinedIcon from '@mui/icons-material/LocalLibraryOutlined';
 import { AppBar, Avatar, Box, Toolbar } from '@mui/material';
 import { UseAuth } from 'hooks/useAuth';
 import UserMenu from 'components/UserMenu/UserMenu';
+import ContactsToolBar from 'components/ContactsToolBar/ContactsToolBar';
 
 export const SharedLayout = () => {
   const { isLoggedIn } = UseAuth();
+
   return (
     <>
       <Box component="div" sx={{ flexGrow: 1 }}>
@@ -29,6 +31,7 @@ export const SharedLayout = () => {
                 <h1>Phonebook</h1>
               </Box>
             </nav>
+            {isLoggedIn && <ContactsToolBar />}
             {isLoggedIn && <UserMenu />}
           </Toolbar>
         </AppBar>

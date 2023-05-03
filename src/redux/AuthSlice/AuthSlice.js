@@ -41,12 +41,12 @@ export const AuthSlice = createSlice({
       .addMatcher(
         swaggerApi.endpoints.getCurrentUser.matchFulfilled,
         (state, { payload }) => {
-          console.log('GetCurrentUser', payload);
+          // console.log('GetCurrentUser', payload);
           //state.token = payload.token;
           state.user = payload;
           state.isLoggedIn = true;
           state.isRefreshing = false;
-          toast.success(`User ${state.user.name} logged in`);
+          toast.success(`Well come back, ${state.user.name}! `);
         }
       )
       .addMatcher(swaggerApi.endpoints.logout.matchFulfilled, state => {
@@ -64,7 +64,7 @@ export const AuthSlice = createSlice({
         ),
         state => {
           if (state.token && state.isRefreshing)
-            toast.error(`Authorisation Error . Try yet`);
+            toast.error(`Authorisation Error. Try yet`);
           state.isLoggedIn = false;
           state.isRefreshing = false;
           state.user = null;

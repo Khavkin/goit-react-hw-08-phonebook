@@ -12,7 +12,6 @@ import storage from 'redux-persist/lib/storage';
 
 import { configureStore } from '@reduxjs/toolkit';
 
-import { phonebookReducer } from './phonebook/phonebookSlice';
 import { swaggerApi } from 'api/swagger-api';
 import { authReducer } from './AuthSlice/AuthSlice';
 
@@ -26,7 +25,6 @@ const persistedAuthReducer = persistReducer(persistConfig, authReducer);
 
 export const store = configureStore({
   reducer: {
-    phonebook: phonebookReducer,
     [swaggerApi.reducerPath]: swaggerApi.reducer,
     auth: persistedAuthReducer,
   },

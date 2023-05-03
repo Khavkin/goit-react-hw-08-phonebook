@@ -14,29 +14,32 @@ export const UserMenu = () => {
     await logout();
     navigate('/login');
   };
+  if (error) toast.error('Logout Error');
+
   return (
-    <Box
-      sx={{
-        display: 'flex',
-        alignItems: 'center',
-        gap: '5px',
-        ml: 'auto',
-      }}
-    >
-      {user.email}
-      <Button
-        type="button"
-        color="inherit"
-        onClick={handleOnClick}
-        sx={{ fontWeight: '700' }}
+    { isLoggedIn } && (
+      <Box
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: '5px',
+        }}
       >
-        {isLoading ? (
-          <ClipLoader color={'primary.contrastText'} size={14} />
-        ) : (
-          'Logout'
-        )}
-      </Button>
-    </Box>
+        {user.email}
+        <Button
+          type="button"
+          color="inherit"
+          onClick={handleOnClick}
+          sx={{ fontWeight: '700' }}
+        >
+          {isLoading ? (
+            <ClipLoader color={'primary.contrastText'} size={14} />
+          ) : (
+            'Logout'
+          )}
+        </Button>
+      </Box>
+    )
   );
 };
 
