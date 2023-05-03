@@ -37,16 +37,15 @@ const validationSchema = Yup.object({
 
 export const RegisterForm = () => {
   const navigate = useNavigate();
-  const [signUp, { error: loginError, isLoading: isLogging }] =
-    useSignUpMutation();
-  const { isLoggedIn, isRefreshing } = UseAuth();
+  const [signUp, { isLoading: isLogging }] = useSignUpMutation();
+  const { isRefreshing } = UseAuth();
 
   const formik = useFormik({
     initialValues: { userName: '', email: '', password: '', confirm: '' },
     validationSchema: validationSchema,
     onSubmit: async (values, { resetForm }) => {
       const { userName, email, password } = values;
-      console.log(values);
+
       try {
         await signUp({
           name: userName,
@@ -58,21 +57,8 @@ export const RegisterForm = () => {
       } catch (error) {
         console.log(error);
       }
-
-      // if (handleSubmit({ email, password })) resetForm();
-      // else alert(`${email} already in contacts`);
     },
   });
-
-  const handleSubmit = user => {
-    // event.preventDefault();
-    // const data = new FormData(event.currentTarget);
-    // console.log({
-    //   email: data.get('email'),
-    //   password: data.get('password'),
-    // });
-    console.log(user);
-  };
 
   return (
     !isRefreshing && (
