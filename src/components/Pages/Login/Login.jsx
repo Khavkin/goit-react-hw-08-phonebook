@@ -38,7 +38,8 @@ export const LoginForm = () => {
   const { isRefreshing } = UseAuth();
 
   const formik = useFormik({
-    initialValues: { email: 'test1836@mail.com', password: 'examplepwd12345' },
+    // initialValues: { email: 'test1836@mail.com', password: 'examplepwd12345' },
+    initialValues: { email: '', password: '' },
     validationSchema: validationSchema,
     onSubmit: async (values, { resetForm }) => {
       try {
